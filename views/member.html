@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript">
+		function getCookie(cname) {
+		    var name = cname + "=";
+		    var decodedCookie = decodeURIComponent(document.cookie);
+		    var ca = decodedCookie.split(';');
+		    for(var i = 0; i <ca.length; i++) {
+		        var c = ca[i];
+		        while (c.charAt(0) == ' ') {
+		            c = c.substring(1);
+		        }
+		        if (c.indexOf(name) == 0) {
+		            return c.substring(name.length, c.length);
+		        }
+		    }
+		    return "";
+		}
+	</script>
+</head>
+<body>
+
+<h1 id="email"></h1>
+<h2 id="money"></h2>
+
+<form class="form-signin" action="/withdraw" method="POST">
+            <h2 class="form-signin-heading text-center">WITHDRAW</h2>
+            <input name="amount" class="form-control" placeholder="Amount" required autofocus>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Withdraw</button>
+ </form>
+
+ <form class="form-signin" action="/deposit" method="POST">
+            <h2 class="form-signin-heading text-center">DEPOSIT</h2>
+            <input name="amount2" class="form-control" placeholder="Amount" required autofocus>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Deposit</button>
+ </form>
+
+ <form class="form-signin" action="/logout" method="POST">
+            <h2 class="form-signin-heading text-center">LOGOUT</h2>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Logout</button>
+ </form>
+
+<script type="text/javascript">
+	
+	var money = getCookie('money');
+	var email = getCookie('logged');
+	document.getElementById("email").innerHTML= 'Welcome '+email;
+	document.getElementById("money").innerHTML= 'Your Balance: '+money;
+
+
+</script>
+</body>
+</html>
