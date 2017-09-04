@@ -3,25 +3,25 @@ const redirect = require('express-redirect');
 const path = require('path');
 const bodyParser = require('body-parser')
 const app = express();
+const { jsonResponse } = require('./utils');
 var cookieParser = require('cookie-parser')
 app.use(cookieParser())
 redirect(app);
 
 var users = [
 	{'id': 1, 'email' : 'geoff@mail.com', 'pass' : '123456', 'money' : 5000},
-	{'id': 2, 'email' : 'jeff@testmail.com', 'pass' : 'qwerty', 'money' : 400},
+	{'id': 2, 'email' : 'mary@mail.com', 'pass' : '54321', 'money' : 400},
 	];
 
-
-// Function for parsing html files
+// FUNCTION FOR PARSING HTML FILES
 function myHTML(url) {
 	return path.join(__dirname+'/views/'+url+'.html');
 }
-
-// Tell express to use the body-parser middleware and to not parse extended bodies
+ 
+// TELL EXPRESS TO USE THE BODY-PARSER MIDDLEWARE AND TO NOT PARSE EXTENDED BODIES
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// Routing for HomePage
+// ROUTING FOR HOMEPAGE
 app.get('/', function(req, res, next){
 		var cookie = req.cookies.logged;
 		console.log(cookie);
@@ -29,7 +29,7 @@ app.get('/', function(req, res, next){
   		console.log('Displaying Home Page');
 });
 
-// Routing for Login
+// ROUTING FOR LOGIN
 app.post('/login', function (req, res) {
   var user = req.body.email;
   var pass = req.body.password;
@@ -52,7 +52,7 @@ app.post('/login', function (req, res) {
   
 });
 
-// Routing for Withdraw
+// ROUTING FOR WITHDRAW
 app.post('/withdraw', function (req, res) {
   var amount = parseInt(req.body.amount);
   var cur_money = parseInt(req.cookies.money);
@@ -61,7 +61,7 @@ app.post('/withdraw', function (req, res) {
   res.redirect('/member');
 });
 
-// Routing for Deposit
+// ROUTING FOR DEPOSIT
 app.post('/deposit', function (req, res) {
   var amount2 = parseInt(req.body.amount2);
   var cur_money = parseInt(req.cookies.money);
@@ -77,7 +77,7 @@ app.post('/logout', function (req, res) {
   res.redirect('/member');
 });
 
-// Routing to Member's Page
+// ROUTING TO MEMBER'S PAGE
 app.get('/member', function(req, res, next){
 	cookie = req.cookies.logged;
 	money = req.cookies.money;
