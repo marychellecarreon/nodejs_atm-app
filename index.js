@@ -21,12 +21,25 @@ function myHTML(url) {
 // TELL EXPRESS TO USE THE BODY-PARSER MIDDLEWARE AND TO NOT PARSE EXTENDED BODIES
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// ROUTING FOR HOMEPAGE
+
+// Routing for HomePage
 app.get('/', function(req, res, next){
-		var cookie = req.cookies.logged;
-		console.log(cookie);
-		res.sendFile(myHTML('index'));
-  		console.log('Displaying Home Page');
+    var cookie = req.cookies.logged;
+    console.log(cookie);
+    res.sendFile(myHTML('index'));
+      console.log('Displaying Home Page');
+});
+
+
+// Routing for HomePage
+app.get('/api/:id', function(req, res, next){
+    for (var i=0; i<users.length; i++) {
+      if (users[i].id == req.params.id) {
+        res.send(users[i]);
+        break;
+      }
+    }
+    res.send('User not Found')
 });
 
 // ROUTING FOR LOGIN
