@@ -3,7 +3,6 @@ const redirect = require('express-redirect');
 const path = require('path');
 const bodyParser = require('body-parser')
 const app = express();
-const { jsonResponse } = require('./utils');
 var cookieParser = require('cookie-parser')
 app.use(cookieParser())
 redirect(app);
